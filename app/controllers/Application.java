@@ -50,6 +50,12 @@ public class Application extends Controller {
    */
   public static Result postContact() {
     Form<ContactFormData> contactForm = Form.form(ContactFormData.class).bindFromRequest();
+
+    if( contactForm.hasErrors()) {
+      System.out.printf("Error in newContact page.\n");
+      return badRequest(NewContact.render("Error in newContact page.", contactForm));
+    }
+
     ContactFormData contact = contactForm.get();
 
     System.out.printf("From newContact:  First: [%s]", contact.firstName);

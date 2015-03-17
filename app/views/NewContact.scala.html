@@ -14,7 +14,7 @@
 
 
   @form(routes.Application.postContact(), 'class -> "form-horizontal") {
-    <div class="form-group">
+    <div class="form-group @if(contact("firstName").hasErrors) {has-error}">
       <label for="inputFirst" class="col-sm-2 control-label">First</label>
       <div class="col-sm-10">
         <input type="text"
@@ -23,9 +23,10 @@
         id="@contact("firstName").id"
         value="@contact("firstName").value"
         placeholder="First">
+        <span class="help-block">@{contact("firstName").error.map {error => error.message}}</span>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group @if(contact("lastName").hasErrors) {has-error}">
       <label for="inputLast" class="col-sm-2 control-label">Last</label>
       <div class="col-sm-10">
         <input type="text"
@@ -34,9 +35,10 @@
         id="@contact("lastName").id"
         value="@contact("lastName").value"
         placeholder="Last">
+        <span class="help-block">@{contact("lastName").error.map {error => error.message}}</span>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group @if(contact("telephone").hasErrors) {has-error}">
       <label for="inputDigits" class="col-sm-2 control-label">Digits</label>
       <div class="col-sm-10">
         <input type="text"
@@ -45,6 +47,7 @@
         id="@contact("telephone").id"
         value="@contact("telephone").value"
         placeholder="Digits">
+        <span class="help-block">@{contact("telephone").error.map {error => error.message}}</span>
       </div>
     </div>
     <div class="form-group">
