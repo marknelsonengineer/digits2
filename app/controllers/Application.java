@@ -55,7 +55,6 @@ public class Application extends Controller {
     System.out.printf("From newContact:  First: [%s]", contact.firstName);
     System.out.printf("  Last: [%s]", contact.lastName);
     System.out.printf("  Digits: [%s]", contact.telephone);
-    System.out.printf("  Address: [%s]", contact.address);
     System.out.printf("\n");
 
     return ok(NewContact.render("New Contact page successful.", contactForm));

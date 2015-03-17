@@ -24,7 +24,4 @@ public class ContactFormData {
 
   /** The telephone number. */
   public String telephone = "";
-
-  /** The address. */
-  public String address = "";
 }
