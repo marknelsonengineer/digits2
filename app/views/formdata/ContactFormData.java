@@ -12,6 +12,9 @@
 
 package views.formdata;
 
+/**
+ * The contact's vital information.
+ */
 public class ContactFormData {
   /** The first name. */
   public String firstName = "";
@@ -21,4 +24,7 @@ public class ContactFormData {
 
   /** The telephone number. */
   public String telephone = "";
+
+  /** The address. */
+  public String address = "";
 }

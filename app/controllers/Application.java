@@ -52,7 +52,11 @@ public class Application extends Controller {
     Form<ContactFormData> contactForm = Form.form(ContactFormData.class).bindFromRequest();
     ContactFormData contact = contactForm.get();
 
-    System.out.printf("From newContact:  First: [%s]  Last: [%s]  Digits: [%s]\n", contact.firstName, contact.lastName, contact.telephone);
+    System.out.printf("From newContact:  First: [%s]", contact.firstName);
+    System.out.printf("  Last: [%s]", contact.lastName);
+    System.out.printf("  Digits: [%s]", contact.telephone);
+    System.out.printf("  Address: [%s]", contact.address);
+    System.out.printf("\n");
 
     return ok(NewContact.render("New Contact page successful.", contactForm));
   }
