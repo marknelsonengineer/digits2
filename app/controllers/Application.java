@@ -8,8 +8,10 @@
 
 package controllers;
 
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.formdata.ContactFormData;
 import views.html.NewContact;
 import views.html.Home;
 
@@ -35,7 +37,28 @@ public class Application extends Controller {
    * @return HTTP OK with page content.
    */
   public static Result newContact() {
-    return ok(NewContact.render("New Contact page successful."));
+    Form<ContactFormData> contactForm = Form.form(ContactFormData.class);
+
+    return ok(NewContact.render("New Contact page successful.", contactForm));
+  }
+
+
+  /**
+   * Retrieve information from the newContact form and print it to the console.
+   *
+   * @return HTTP OK with page content.
+   */
+  public static Result postContact() {
+    Form<ContactFormData> contactForm = Form.form(ContactFormData.class).bindFromRequest();
+    ContactFormData contact = contactForm.get();
+
+    System.out.printf("From newContact:  First: [%s]", contact.firstName);
+    System.out.printf("  Last: [%s]", contact.lastName);
+    System.out.printf("  Digits: [%s]", contact.telephone);
+    System.out.printf("  Address: [%s]", contact.address);
+    System.out.printf("\n");
+
+    return ok(NewContact.render("New Contact page successful.", contactForm));
   }
 
 }
