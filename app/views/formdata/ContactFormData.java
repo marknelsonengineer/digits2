@@ -31,23 +31,28 @@ public class ContactFormData {
   /** The telephone number. */
   public String telephone = "";
 
+  /**
+   * Check ContactForm for invalid data.
+   *
+   * @return Null if no errors, otherwise a list of ValidationErrors.
+   */
   public List<ValidationError> validate() {
     List<ValidationError> errors = new ArrayList<>();
 
-    if(firstName == null || firstName.length() <= 0) {
-      errors.add( new ValidationError("firstName", "First name is required."));
+    if (firstName == null || firstName.length() <= 0) {
+      errors.add(new ValidationError("firstName", "First name is required."));
     }
 
-    if(lastName == null || lastName.length() <= 0) {
-      errors.add( new ValidationError("lastName", "Last name is required."));
+    if (lastName == null || lastName.length() <= 0) {
+      errors.add(new ValidationError("lastName", "Last name is required."));
     }
 
-    if(telephone == null || telephone.length() <= 0) {
-      errors.add( new ValidationError("telephone", "A telephone number is required."));
+    if (telephone == null || telephone.length() <= 0) {
+      errors.add(new ValidationError("telephone", "A telephone number is required."));
     }
 
-    if(telephone == null || telephone.length() <= TELEPHONE_NUMBER_LENGTH ) {
-      errors.add( new ValidationError("telephone",
+    if (telephone == null || telephone.length() <= TELEPHONE_NUMBER_LENGTH) {
+      errors.add(new ValidationError("telephone",
           "The telephone number must be at least " + TELEPHONE_NUMBER_LENGTH + " digits long."));
     }
 
