@@ -4,7 +4,7 @@
 
 # Home page
 GET        /                    controllers.Application.home()
-GET        /contact             controllers.Application.newContact()
+GET        /contact             controllers.Application.newContact(id: Long ?= 0)
 POST       /contact             controllers.Application.postContact()
 
 # Map static resources from the /public folder to the /assets URL path

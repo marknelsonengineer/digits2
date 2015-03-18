@@ -40,10 +40,21 @@ public class Application extends Controller {
   /**
    * New Contact page for the application.
    *
+   * @param id The ID number of the contact to create or 0 for new contact.
    * @return HTTP OK with page content.
    */
-  public static Result newContact() {
-    Form<ContactFormData> contactForm = Form.form(ContactFormData.class);
+  public static Result newContact(long id) {
+
+    ContactFormData contactFormData = null;
+
+    if (id == 0) {
+      contactFormData = new ContactFormData();
+    }
+    else {
+      contactFormData = new ContactFormData(ContactDB.getContact(id));
+    }
+
+    Form<ContactFormData> contactForm = Form.form(ContactFormData.class).fill(contactFormData);
 
     return ok(NewContact.render("New Contact page successful.", contactForm));
   }

@@ -16,15 +16,18 @@ public class Contact {
   private String firstName;
   private String lastName;
   private String telephone;
+  private long id;
 
   /**
    * Builds a contact object.
    *
+   * @param id The id number.
    * @param firstName The first name.
    * @param lastName The last name.
    * @param telephone The contact's telephone number.
    */
-  public Contact(String firstName, String lastName, String telephone) {
+  public Contact(long id, String firstName, String lastName, String telephone) {
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.telephone = telephone;
@@ -58,5 +61,15 @@ public class Contact {
    */
   public String getTelephone() {
     return telephone;
+  }
+
+
+  /**
+   * Get the ID number.
+   *
+   * @return The unique ID number for this contact.
+   */
+  public long getId() {
+    return id;
   }
 }

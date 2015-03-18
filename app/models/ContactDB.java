@@ -11,14 +11,34 @@ package models;
 import views.formdata.ContactFormData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * An in-memory, non-persistent repository for all Contact objects.
  */
 public class ContactDB {
 
-  static List contacts = new ArrayList<Contact>();
+  static Map contacts = new HashMap<Long, Contact>();
+  static long currentContactId = 1; // This is the next, unused Id number.
+
+
+  /**
+   * Return a contact object.
+   *
+   * @param id The ID number of the contact.
+   * @return The contact object.
+   */
+  public static Contact getContact(long id) {
+    Contact contact = (Contact) contacts.get(id);
+    if (contact == null) {
+      throw new RuntimeException("Attempt to retrieve invalid contact id");
+    }
+
+    return contact;
+  }
+
 
   /**
    * Add a contact from an HTML form.
@@ -27,12 +47,19 @@ public class ContactDB {
    * @return A contact object.
    */
   public static Contact addContactFromView(ContactFormData contactView) {
-    Contact contact = new Contact(contactView.firstName, contactView.lastName, contactView.telephone);
+    Contact contact = null;
+    if (contactView.id == 0) { // New Contact
+      contact = new Contact(currentContactId++, contactView.firstName, contactView.lastName, contactView.telephone);
+    }
+    else { // Current contact
+      contact = new Contact(contactView.id, contactView.firstName, contactView.lastName, contactView.telephone);
+    }
 
-    contacts.add(contact);
+    contacts.put(contact.getId(), contact);
 
     return contact;
   }
+
 
   /**
    * Return all of the contacts.
@@ -40,7 +67,7 @@ public class ContactDB {
    * @return A List of Contact objects.
    */
   public static List<Contact> getContacts() {
-    return contacts;
+    return new ArrayList<>(contacts.values());
   }
 
 }
